@@ -27,7 +27,7 @@ RUN apt-get -qq update && apt-get -qq install -y \
 # Copy the contents from the InstallFile folder from the host machine to the /mcr-install folder in the image and install
 COPY /InstallFile/ /mcr-install
 
-RUN ./mcr-install/MyAppInstaller_mcr.install -agreeToLicense yes -mode silent -destinationFolder /mcr
+RUN ./mcr-install/MyAppInstaller_web_train.install -agreeToLicense yes -mode silent -destinationFolder /mcr
 
 # move the application from the default folder over to /opt/program. This can likely be moved somewhere else, 
 # but be sure to set the WORKDIR appropriately
@@ -39,9 +39,9 @@ RUN rm -rf mcr-install
 
 
 # Build environment variables
-ENV MCR_ROOT=/mcr/v95
+ENV MCR_ROOT=/mcr/v911
 ENV PATH=$PATH:${MCR_ROOT}/bin
-ENV XAPPLRESDIR=/mcr/v95/X11/app-defaults
+ENV XAPPLRESDIR=/mcr/v911/X11/app-defaults
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${MCR_ROOT}/runtime/glnxa64:${MCR_ROOT}/bin/glnxa64:${MCR_ROOT}/sys/os/glnxa64:${MCR_ROOT}/sys/opengl/lib/glnxa64
 ENV PATH="/opt/program:${PATH}"
 
